@@ -1,0 +1,2617 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من سيربح المليون - نسخة المدرسة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+        
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+        }
+        
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+        
+        .gold-gradient {
+            background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .money-ladder {
+            background: linear-gradient(to bottom, #1a1a2e, #16213e);
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+        
+        .question-card {
+            background: linear-gradient(135deg, #0f3460 0%, #0e4b99 100%);
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .option-btn {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .option-btn:hover::before {
+            left: 100%;
+        }
+        
+        .option-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .correct-answer {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+            animation: correctPulse 1s ease-in-out;
+        }
+        
+        .wrong-answer {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%) !important;
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .team-card {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            border: 2px solid #fbbf24;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .team-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+        
+        .active-team {
+            border-color: #ffd700 !important;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5) !important;
+            animation: activeGlow 2s infinite alternate;
+        }
+        
+        @keyframes activeGlow {
+            from { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+            to { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .connection-online {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+        
+        .connection-offline {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .topic-selector {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border: 2px solid #a855f7;
+            transition: all 0.3s ease;
+        }
+        
+        .topic-selector:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        }
+        
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 2px;
+        }
+        
+        .difficulty-easy { background: #10b981; color: white; }
+        .difficulty-medium { background: #f59e0b; color: white; }
+        .difficulty-hard { background: #ef4444; color: white; }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #059669);
+            transition: width 0.3s ease;
+        }
+        
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            animation: float 6s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1001;
+            padding: 16px 20px;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .notification-error {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        
+        .notification-info {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+        
+        .celebration-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            animation: confetti-fall 3s linear infinite;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .wrong-effect {
+            animation: wrongShake 0.6s ease-in-out;
+        }
+        
+        @keyframes wrongShake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+        
+        .timer-warning {
+            animation: timerPulse 1s infinite;
+        }
+        
+        @keyframes timerPulse {
+            0%, 100% { 
+                background: linear-gradient(135deg, #dc2626, #ef4444);
+                transform: scale(1);
+            }
+            50% { 
+                background: linear-gradient(135deg, #ef4444, #f87171);
+                transform: scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <!-- مؤشر حالة الاتصال -->
+    <div id="connectionStatus" class="connection-status connection-online">
+        <i class="fas fa-wifi"></i> متصل
+    </div>
+    
+    <!-- منطقة الإشعارات -->
+    <div id="notificationArea"></div>
+    
+    <!-- الجسيمات المتحركة -->
+    <div class="floating-particles" id="particles"></div>
+    <!-- الشاشة الرئيسية -->
+    <div id="homeScreen" class="min-h-screen flex items-center justify-center p-4">
+        <div class="text-center max-w-4xl mx-auto">
+            <!-- قائمة المطور -->
+            <div class="fixed top-4 left-4 z-50">
+                <button onclick="toggleDeveloperMenu()" class="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 p-3 rounded-full text-white shadow-lg transition-all duration-300 transform hover:scale-110">
+                    <i class="fas fa-info-circle text-xl"></i>
+                </button>
+            </div>
+
+            <!-- القائمة المنبثقة للمطور -->
+            <div id="developerMenu" class="fixed top-20 left-4 z-50 bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-2xl border border-white/20 hidden transform transition-all duration-300 scale-95 opacity-0" style="display: none;">
+                <div class="text-right">
+                    <button onclick="toggleDeveloperMenu()" class="text-white/70 hover:text-white text-xl mb-4">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-user-tie text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">أ. عبد الرحمن نصر الله</h3>
+                    <p class="text-sm text-blue-200">مطور التطبيق</p>
+                </div>
+
+                <div class="space-y-3">
+                    <a href="https://www.instagram.com/nasrallah_2002/" target="_blank" class="flex items-center p-3 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 rounded-lg transition-all duration-300 transform hover:scale-105 text-white">
+                        <i class="fab fa-instagram text-xl ml-3"></i>
+                        <div>
+                            <div class="font-bold">إنستغرام</div>
+                            <div class="text-xs opacity-90">@nasrallah_2002</div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.youtube.com/@tnasrallah" target="_blank" class="flex items-center p-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-lg transition-all duration-300 transform hover:scale-105 text-white">
+                        <i class="fab fa-youtube text-xl ml-3"></i>
+                        <div>
+                            <div class="font-bold">يوتيوب</div>
+                            <div class="text-xs opacity-90">@tnasrallah</div>
+                        </div>
+                    </a>
+                    
+                    <button onclick="showGameInfo()" class="w-full flex items-center p-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-lg transition-all duration-300 transform hover:scale-105 text-white">
+                        <i class="fas fa-question-circle text-xl ml-3"></i>
+                        <div>
+                            <div class="font-bold">حول اللعبة</div>
+                            <div class="text-xs opacity-90">معلومات وتعليمات</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- نافذة معلومات اللعبة -->
+            <div id="gameInfoModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-60 hidden flex items-center justify-center p-4">
+                <div class="bg-white/10 backdrop-blur-lg rounded-xl p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto border border-white/20">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-bold text-white">
+                            <i class="fas fa-gamepad text-yellow-400 ml-2"></i>
+                            حول اللعبة
+                        </h2>
+                        <button onclick="closeGameInfo()" class="text-white/70 hover:text-white text-2xl">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-6 text-white">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 text-yellow-300">
+                                <i class="fas fa-star ml-2"></i>
+                                ما هي لعبة "من سيربح المليون التعليمية"؟
+                            </h3>
+                            <p class="text-gray-200 leading-relaxed">
+                                لعبة تعليمية تفاعلية مستوحاة من البرنامج الشهير "من سيربح المليون" مصممة خصيصاً للبيئة التعليمية. تهدف إلى جعل التعلم أكثر متعة وتشويقاً من خلال المنافسة الودية بين الطلاب.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 text-green-300">
+                                <i class="fas fa-cogs ml-2"></i>
+                                الميزات الرئيسية:
+                            </h3>
+                            <ul class="space-y-2 text-gray-200">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-400 ml-2"></i>
+                                    إنشاء أسئلة تلقائياً بالذكاء الاصطناعي
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-400 ml-2"></i>
+                                    إضافة أسئلة يدوياً مع مساعد ذكي
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-400 ml-2"></i>
+                                    دعم فرق متعددة (2-4 فرق)
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-400 ml-2"></i>
+                                    مواضيع متنوعة ومستويات صعوبة مختلفة
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-400 ml-2"></i>
+                                    واجهة جميلة ومؤثرات بصرية
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 text-blue-300">
+                                <i class="fas fa-play ml-2"></i>
+                                كيفية اللعب:
+                            </h3>
+                            <ol class="space-y-2 text-gray-200">
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold ml-2 mt-0.5">1</span>
+                                    اختر "بدء لعبة جديدة" من الشاشة الرئيسية
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold ml-2 mt-0.5">2</span>
+                                    حدد عدد الفرق وأسماءها
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold ml-2 mt-0.5">3</span>
+                                    اختر الموضوع وعدد الأسئلة ومستوى الصعوبة
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold ml-2 mt-0.5">4</span>
+                                    ولّد الأسئلة أو استخدم الأسئلة المحفوظة
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold ml-2 mt-0.5">5</span>
+                                    ابدأ اللعبة واستمتع بالمنافسة!
+                                </li>
+                            </ol>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 text-purple-300">
+                                <i class="fas fa-lightbulb ml-2"></i>
+                                نصائح للمعلمين:
+                            </h3>
+                            <ul class="space-y-2 text-gray-200">
+                                <li class="flex items-center">
+                                    <i class="fas fa-arrow-left text-purple-400 ml-2"></i>
+                                    استخدم "مساعد المعلم" لتوليد أسئلة مخصصة
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-arrow-left text-purple-400 ml-2"></i>
+                                    احفظ الأسئلة المفيدة لاستخدامها لاحقاً
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-arrow-left text-purple-400 ml-2"></i>
+                                    نوّع في مستويات الصعوبة لتناسب جميع الطلاب
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-arrow-left text-purple-400 ml-2"></i>
+                                    شجع التعاون والمنافسة الإيجابية
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-8">
+                <h1 class="text-6xl font-black mb-4 gold-gradient bg-clip-text text-transparent pulse-animation">
+                    💰 من سيربح المليون 💰
+                </h1>
+                <p class="text-xl text-blue-100">النسخة التعليمية المتطورة</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <button onclick="showSetup()" class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 p-6 rounded-xl text-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    🎮 بدء لعبة جديدة
+                </button>
+                <button onclick="showQuestionManager()" class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 p-6 rounded-xl text-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    📝 إدارة الأسئلة
+                </button>
+                <button onclick="showAIGenerator()" class="bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 p-6 rounded-xl text-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    🤖 الذكاء الاصطناعي
+                </button>
+                <button onclick="showGameInfo()" class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 p-6 rounded-xl text-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    📖 شرح اللعبة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- شاشة إعداد اللعبة -->
+    <div id="setupScreen" class="hidden min-h-screen p-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold mb-4">⚙️ إعداد اللعبة</h2>
+                <button onclick="showHome()" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg">← العودة للرئيسية</button>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- إعداد الفرق -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                    <h3 class="text-2xl font-bold mb-4">👥 إعداد الفرق</h3>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">عدد الفرق:</label>
+                        <select id="teamCount" onchange="updateTeamInputs()" class="w-full p-3 rounded-lg bg-blue-900 border border-blue-700 text-white">
+                            <option value="2">فريقان</option>
+                            <option value="4">أربعة فرق</option>
+                        </select>
+                    </div>
+                    
+                    <div id="teamInputs" class="space-y-3">
+                        <!-- سيتم إنشاؤها ديناميكياً -->
+                    </div>
+                </div>
+                
+                <!-- إعداد الأسئلة -->
+                <div class="glass-card rounded-xl p-6">
+                    <h3 class="text-2xl font-bold mb-4">❓ إعداد الأسئلة</h3>
+                    
+                    <div class="space-y-4">
+                        <!-- اختيار الموضوع -->
+                        <div>
+                            <label class="block text-sm font-medium mb-3">📚 اختر الموضوع:</label>
+                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                <button onclick="selectTopic('الرياضيات')" class="topic-selector p-3 rounded-lg text-sm font-bold transition-all duration-300">
+                                    🔢 الرياضيات
+                                </button>
+                                <button onclick="selectTopic('العلوم')" class="topic-selector p-3 rounded-lg text-sm font-bold transition-all duration-300">
+                                    🧪 العلوم
+                                </button>
+                                <button onclick="selectTopic('التاريخ')" class="topic-selector p-3 rounded-lg text-sm font-bold transition-all duration-300">
+                                    📜 التاريخ
+                                </button>
+                                <button onclick="selectTopic('الجغرافيا')" class="topic-selector p-3 rounded-lg text-sm font-bold transition-all duration-300">
+                                    🌍 الجغرافيا
+                                </button>
+                                <button onclick="selectTopic('اللغة العربية')" class="topic-selector p-3 rounded-lg text-sm font-bold transition-all duration-300">
+                                    📖 اللغة العربية
+                                </button>
+                                <button onclick="selectTopic('الثقافة العامة')" class="topic-selector p-3 rounded-lg text-sm font-bold transition-all duration-300">
+                                    🎭 الثقافة العامة
+                                </button>
+                            </div>
+                            <input type="text" id="topic" placeholder="أو اكتب موضوعاً مخصصاً..." class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white placeholder-blue-300 backdrop-blur-sm">
+                        </div>
+                        
+                        <!-- تفاصيل الموضوع -->
+                        <div id="topicDetails" class="hidden">
+                            <label class="block text-sm font-medium mb-2">🎯 تفاصيل إضافية للموضوع:</label>
+                            <textarea id="topicSpecifics" rows="2" placeholder="مثال: التركيز على الجبر والهندسة، أو الفترة الإسلامية في التاريخ..." class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white placeholder-blue-300 backdrop-blur-sm"></textarea>
+                        </div>
+                        
+                        <!-- المرحلة التعليمية -->
+                        <div>
+                            <label class="block text-sm font-medium mb-2">🎓 المرحلة التعليمية:</label>
+                            <select id="educationLevel" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white backdrop-blur-sm">
+                                <option value="elementary">المرحلة الابتدائية</option>
+                                <option value="middle">المرحلة المتوسطة</option>
+                                <option value="high">المرحلة الثانوية</option>
+                                <option value="university">المرحلة الجامعية</option>
+                            </select>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">📊 عدد الأسئلة:</label>
+                                <select id="questionCount" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white backdrop-blur-sm">
+                                    <option value="5">5 أسئلة</option>
+                                    <option value="10">10 أسئلة</option>
+                                    <option value="15">15 سؤال</option>
+                                    <option value="20">20 سؤال</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">⚡ مستوى الصعوبة:</label>
+                                <select id="difficulty" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white backdrop-blur-sm">
+                                    <option value="easy">سهل 🟢</option>
+                                    <option value="medium">متوسط 🟡</option>
+                                    <option value="hard">صعب 🔴</option>
+                                    <option value="mixed">مختلط 🌈</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- إعدادات التوقيت -->
+                        <div>
+                            <label class="block text-sm font-medium mb-2">⏰ التوقيت الزمني لكل سؤال:</label>
+                            <select id="questionTimer" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white backdrop-blur-sm">
+                                <option value="0">بدون توقيت ⏳</option>
+                                <option value="30">30 ثانية ⚡</option>
+                                <option value="60">دقيقة واحدة 🕐</option>
+                                <option value="90">دقيقة ونصف 🕐</option>
+                                <option value="120">دقيقتان 🕑</option>
+                                <option value="180">3 دقائق 🕒</option>
+                            </select>
+                        </div>
+                        
+                        <!-- شريط التقدم -->
+                        <div id="generationProgress" class="hidden">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm">جاري التوليد...</span>
+                                <span id="progressPercent" class="text-sm">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="generateQuestions()" id="generateBtn" class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 p-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-robot"></i> توليد بالذكاء الاصطناعي
+                            </button>
+                            
+                            <button onclick="useManualQuestions()" class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 p-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-edit"></i> استخدام الأسئلة اليدوية
+                            </button>
+                        </div>
+                        
+                        <!-- معاينة الأسئلة المولدة -->
+                        <div id="generatedPreview" class="hidden mt-4 p-4 bg-green-900/30 rounded-lg border border-green-500">
+                            <h4 class="font-bold text-green-300 mb-2">✅ تم توليد الأسئلة بنجاح!</h4>
+                            <div id="previewContent" class="text-sm text-green-100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <button onclick="startGame()" class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 px-8 py-4 rounded-xl text-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    🚀 بدء اللعبة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- شاشة الذكاء الاصطناعي -->
+    <div id="aiGeneratorScreen" class="hidden min-h-screen p-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold mb-4">
+                    <i class="fas fa-robot animate-pulse"></i> مولد الأسئلة بالذكاء الاصطناعي
+                </h2>
+                <button onclick="showHome()" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105">
+                    <i class="fas fa-arrow-right"></i> العودة للرئيسية
+                </button>
+            </div>
+            
+            <div class="glass-card rounded-xl p-8">
+                <div class="space-y-6">
+                    <!-- اختيار الموضوع -->
+                    <div>
+                        <label class="block text-sm font-medium mb-3">📚 اختر الموضوع:</label>
+                        <div class="grid grid-cols-2 gap-2 mb-3">
+                            <button onclick="selectAITopic('الرياضيات')" class="topic-selector p-3 rounded-lg text-sm font-bold transition-all duration-300">
+                                🔢 الرياضيات
+                            </button>
+                            <button onclick="selectAITopic('العلوم')" class="topic-selector p-3 rounded-lg text-sm font-bold transition-all duration-300">
+                                🧪 العلوم
+                            </button>
+                            <button onclick="selectAITopic('التاريخ')" class="topic-selector p-3 rounded-lg text-sm font-bold transition-all duration-300">
+                                📜 التاريخ
+                            </button>
+                            <button onclick="selectAITopic('الجغرافيا')" class="topic-selector p-3 rounded-lg text-sm font-bold transition-all duration-300">
+                                🌍 الجغرافيا
+                            </button>
+                            <button onclick="selectAITopic('اللغة العربية')" class="topic-selector p-3 rounded-lg text-sm font-bold transition-all duration-300">
+                                📖 اللغة العربية
+                            </button>
+                            <button onclick="selectAITopic('الثقافة العامة')" class="topic-selector p-3 rounded-lg text-sm font-bold transition-all duration-300">
+                                🎭 الثقافة العامة
+                            </button>
+                        </div>
+                        <input type="text" id="aiTopic" placeholder="أو اكتب موضوعاً مخصصاً..." class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white placeholder-blue-300 backdrop-blur-sm">
+                    </div>
+                    
+                    <!-- تفاصيل الموضوع -->
+                    <div id="aiTopicDetails" class="hidden">
+                        <label class="block text-sm font-medium mb-2">🎯 تفاصيل إضافية للموضوع:</label>
+                        <textarea id="aiTopicSpecifics" rows="2" placeholder="مثال: التركيز على الجبر والهندسة، أو الفترة الإسلامية في التاريخ..." class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white placeholder-blue-300 backdrop-blur-sm"></textarea>
+                    </div>
+                    
+                    <!-- المرحلة التعليمية -->
+                    <div>
+                        <label class="block text-sm font-medium mb-2">🎓 المرحلة التعليمية:</label>
+                        <select id="aiEducationLevel" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white backdrop-blur-sm">
+                            <option value="elementary">المرحلة الابتدائية</option>
+                            <option value="middle">المرحلة المتوسطة</option>
+                            <option value="high">المرحلة الثانوية</option>
+                            <option value="university">المرحلة الجامعية</option>
+                        </select>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">📊 عدد الأسئلة:</label>
+                            <select id="aiQuestionCount" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white backdrop-blur-sm">
+                                <option value="5">5 أسئلة</option>
+                                <option value="10">10 أسئلة</option>
+                                <option value="15">15 سؤال</option>
+                                <option value="20">20 سؤال</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">⚡ مستوى الصعوبة:</label>
+                            <select id="aiDifficulty" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white backdrop-blur-sm">
+                                <option value="easy">سهل 🟢</option>
+                                <option value="medium">متوسط 🟡</option>
+                                <option value="hard">صعب 🔴</option>
+                                <option value="mixed">مختلط 🌈</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- شريط التقدم -->
+                    <div id="aiGenerationProgress" class="hidden">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm">جاري التوليد...</span>
+                            <span id="aiProgressPercent" class="text-sm">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div id="aiProgressFill" class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="generateAIQuestions()" id="aiGenerateBtn" class="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 p-4 rounded-lg text-xl font-bold transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-robot"></i> توليد الأسئلة بالذكاء الاصطناعي
+                    </button>
+                    
+                    <!-- معاينة الأسئلة المولدة -->
+                    <div id="aiGeneratedPreview" class="hidden mt-4 p-4 bg-green-900/30 rounded-lg border border-green-500">
+                        <h4 class="font-bold text-green-300 mb-2">✅ تم توليد الأسئلة بنجاح!</h4>
+                        <div id="aiPreviewContent" class="text-sm text-green-100"></div>
+                        <div class="mt-4 flex gap-3">
+                            <button onclick="saveAIQuestions()" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded font-bold transition-all duration-300">
+                                <i class="fas fa-save"></i> حفظ الأسئلة
+                            </button>
+                            <button onclick="useAIQuestionsDirectly()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded font-bold transition-all duration-300">
+                                <i class="fas fa-play"></i> استخدام مباشرة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- شاشة إدارة الأسئلة -->
+    <div id="questionManagerScreen" class="hidden min-h-screen p-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold mb-4">
+                    <i class="fas fa-cogs animate-spin"></i> إدارة الأسئلة
+                </h2>
+                <button onclick="showHome()" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105">
+                    <i class="fas fa-arrow-right"></i> العودة للرئيسية
+                </button>
+            </div>
+            
+            <!-- شريط الإحصائيات -->
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-4 mb-8 text-center">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <i class="fas fa-question-circle text-2xl mb-2 text-yellow-300"></i>
+                        <div class="text-lg font-bold" id="totalQuestionsCount">0</div>
+                        <div class="text-sm">إجمالي الأسئلة</div>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <i class="fas fa-plus-circle text-2xl mb-2 text-green-300"></i>
+                        <div class="text-lg font-bold" id="sessionQuestionsCount">0</div>
+                        <div class="text-sm">أسئلة هذه الجلسة</div>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <i class="fas fa-robot text-2xl mb-2 text-purple-300"></i>
+                        <div class="text-lg font-bold" id="aiQuestionsCount">0</div>
+                        <div class="text-sm">أسئلة الذكاء الاصطناعي</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- طرق إضافة الأسئلة -->
+            <div class="grid lg:grid-cols-3 gap-6 mb-8">
+                <!-- الإضافة اليدوية -->
+                <div class="glass-card rounded-xl p-6">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-edit text-4xl text-blue-400 mb-2"></i>
+                        <h3 class="text-xl font-bold">إضافة يدوية</h3>
+                        <p class="text-sm text-gray-300">اكتب الأسئلة بنفسك</p>
+                    </div>
+                    <button onclick="showManualInput()" class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 p-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-pencil-alt"></i> بدء الكتابة
+                    </button>
+                </div>
+                
+                <!-- مساعد المعلم -->
+                <div class="glass-card rounded-xl p-6">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-magic text-4xl text-purple-400 mb-2"></i>
+                        <h3 class="text-xl font-bold">مساعد المعلم</h3>
+                        <p class="text-sm text-gray-300">احصل على صيغة للذكاء الاصطناعي</p>
+                    </div>
+                    <button onclick="showTeacherAssistant()" class="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 p-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-wand-magic-sparkles"></i> مساعد ذكي
+                    </button>
+                </div>
+                
+                <!-- محول النصوص -->
+                <div class="glass-card rounded-xl p-6">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-exchange-alt text-4xl text-green-400 mb-2"></i>
+                        <h3 class="text-xl font-bold">محول النصوص</h3>
+                        <p class="text-sm text-gray-300">حول النص لأسئلة تلقائياً</p>
+                    </div>
+                    <button onclick="showTextConverter()" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 p-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-sync-alt"></i> تحويل النص
+                    </button>
+                </div>
+            </div>
+            
+            <!-- منطقة العمل -->
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- منطقة الإدخال -->
+                <div class="space-y-6">
+                    <!-- الإدخال اليدوي -->
+                    <div id="manualInputSection" class="glass-card rounded-xl p-6 hidden">
+                        <h3 class="text-2xl font-bold mb-4">
+                            <i class="fas fa-edit text-blue-400"></i> إضافة سؤال جديد
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">
+                                    <i class="fas fa-question"></i> السؤال:
+                                </label>
+                                <textarea id="newQuestion" rows="3" placeholder="اكتب السؤال هنا..." class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white placeholder-blue-300 backdrop-blur-sm"></textarea>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">
+                                        <i class="fas fa-circle text-red-400"></i> الخيار أ:
+                                    </label>
+                                    <input type="text" id="optionA" placeholder="الخيار الأول" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white placeholder-blue-300 backdrop-blur-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">
+                                        <i class="fas fa-circle text-yellow-400"></i> الخيار ب:
+                                    </label>
+                                    <input type="text" id="optionB" placeholder="الخيار الثاني" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white placeholder-blue-300 backdrop-blur-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">
+                                        <i class="fas fa-circle text-green-400"></i> الخيار ج:
+                                    </label>
+                                    <input type="text" id="optionC" placeholder="الخيار الثالث" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white placeholder-blue-300 backdrop-blur-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">
+                                        <i class="fas fa-circle text-purple-400"></i> الخيار د:
+                                    </label>
+                                    <input type="text" id="optionD" placeholder="الخيار الرابع" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white placeholder-blue-300 backdrop-blur-sm">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">
+                                    <i class="fas fa-check-circle text-green-400"></i> الإجابة الصحيحة:
+                                </label>
+                                <select id="correctAnswer" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white backdrop-blur-sm">
+                                    <option value="A">أ</option>
+                                    <option value="B">ب</option>
+                                    <option value="C">ج</option>
+                                    <option value="D">د</option>
+                                </select>
+                            </div>
+                            
+                            <button onclick="addQuestion()" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 p-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-plus-circle"></i> إضافة السؤال
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- مساعد المعلم -->
+                    <div id="teacherAssistantSection" class="glass-card rounded-xl p-6 hidden">
+                        <h3 class="text-2xl font-bold mb-4">
+                            <i class="fas fa-magic text-purple-400"></i> مساعد المعلم الذكي
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-purple-900/30 p-4 rounded-lg border border-purple-500">
+                                <h4 class="font-bold text-purple-300 mb-2">
+                                    <i class="fas fa-info-circle"></i> كيف يعمل المساعد؟
+                                </h4>
+                                <ol class="text-sm text-purple-100 space-y-1">
+                                    <li>1. حدد الموضوع والتفاصيل أدناه</li>
+                                    <li>2. انسخ الصيغة المولدة</li>
+                                    <li>3. استخدمها مع أي ذكاء اصطناعي (ChatGPT, Gemini, Claude...)</li>
+                                    <li>4. انسخ النتيجة واستخدم "محول النصوص"</li>
+                                </ol>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">الموضوع:</label>
+                                    <input type="text" id="assistantTopic" placeholder="مثال: الرياضيات" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white placeholder-blue-300 backdrop-blur-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">عدد الأسئلة:</label>
+                                    <select id="assistantCount" class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white backdrop-blur-sm">
+                                        <option value="5">5 أسئلة</option>
+                                        <option value="10">10 أسئلة</option>
+                                        <option value="15">15 سؤال</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">تفاصيل إضافية:</label>
+                                <textarea id="assistantDetails" rows="2" placeholder="مثال: للصف الثالث الابتدائي، التركيز على الجمع والطرح..." class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white placeholder-blue-300 backdrop-blur-sm"></textarea>
+                            </div>
+                            
+                            <button onclick="generatePrompt()" class="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 p-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-wand-magic-sparkles"></i> إنشاء الصيغة
+                            </button>
+                            
+                            <div id="generatedPrompt" class="hidden">
+                                <label class="block text-sm font-medium mb-2">
+                                    <i class="fas fa-copy"></i> الصيغة الجاهزة:
+                                </label>
+                                <div class="relative">
+                                    <textarea id="promptText" rows="6" readonly class="w-full p-3 rounded-lg bg-green-900/30 border border-green-500 text-green-100 text-sm"></textarea>
+                                    <button onclick="copyPrompt()" class="absolute top-2 left-2 bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-xs transition-all duration-300">
+                                        <i class="fas fa-copy"></i> نسخ
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- محول النصوص -->
+                    <div id="textConverterSection" class="glass-card rounded-xl p-6 hidden">
+                        <h3 class="text-2xl font-bold mb-4">
+                            <i class="fas fa-exchange-alt text-green-400"></i> محول النصوص الذكي
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-green-900/30 p-4 rounded-lg border border-green-500">
+                                <h4 class="font-bold text-green-300 mb-2">
+                                    <i class="fas fa-lightbulb"></i> تعليمات الاستخدام:
+                                </h4>
+                                <p class="text-sm text-green-100">
+                                    الصق النص المولد من الذكاء الاصطناعي أدناه، وسيتم تحويله تلقائياً إلى أسئلة منظمة
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium mb-2">
+                                    <i class="fas fa-paste"></i> النص المراد تحويله:
+                                </label>
+                                <textarea id="textToConvert" rows="8" placeholder="الصق هنا النص المولد من الذكاء الاصطناعي..." class="w-full p-3 rounded-lg bg-blue-900/50 border border-blue-700 text-white placeholder-blue-300 backdrop-blur-sm"></textarea>
+                            </div>
+                            
+                            <button onclick="convertText()" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 p-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-sync-alt"></i> تحويل النص
+                            </button>
+                            
+                            <div id="conversionResult" class="hidden">
+                                <div class="bg-green-900/30 p-4 rounded-lg border border-green-500">
+                                    <h4 class="font-bold text-green-300 mb-2">
+                                        <i class="fas fa-check-circle"></i> نتيجة التحويل:
+                                    </h4>
+                                    <div id="convertedQuestions" class="text-sm text-green-100"></div>
+                                    <button onclick="saveConvertedQuestions()" class="mt-3 bg-green-600 hover:bg-green-700 px-4 py-2 rounded font-bold transition-all duration-300">
+                                        <i class="fas fa-save"></i> حفظ الأسئلة
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- قائمة الأسئلة -->
+                <div class="glass-card rounded-xl p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-2xl font-bold">
+                            <i class="fas fa-list text-yellow-400"></i> الأسئلة المحفوظة
+                        </h3>
+                        <div class="space-x-2 space-x-reverse">
+                            <button onclick="exportQuestions()" class="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded text-sm transition-all duration-300">
+                                <i class="fas fa-download"></i> تصدير
+                            </button>
+                            <button onclick="deleteAllQuestions()" class="bg-red-600 hover:bg-red-700 px-3 py-2 rounded text-sm transition-all duration-300">
+                                <i class="fas fa-trash-alt"></i> حذف الكل
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="questionsListContainer">
+                        <div id="questionsList" class="space-y-3 max-h-96 overflow-y-auto">
+                            <!-- سيتم إنشاؤها ديناميكياً -->
+                        </div>
+                        
+                        <div id="noQuestionsMessage" class="text-center py-8 text-gray-400 hidden">
+                            <i class="fas fa-question-circle text-4xl mb-4"></i>
+                            <p>لا توجد أسئلة محفوظة بعد</p>
+                            <p class="text-sm">ابدأ بإضافة أسئلة جديدة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- شاشة اللعبة -->
+    <div id="gameScreen" class="hidden min-h-screen p-4">
+        <div class="max-w-7xl mx-auto">
+            <!-- شريط المعلومات العلوي -->
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex space-x-4 space-x-reverse">
+                    <button onclick="pauseGame()" class="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded-lg font-bold">⏸️ إيقاف مؤقت</button>
+                    <button onclick="endGame()" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg font-bold">🏁 إنهاء اللعبة</button>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold">السؤال <span id="currentQuestionNumber">1</span> من <span id="totalQuestions">10</span></div>
+                    <div class="text-lg">الدور: <span id="currentTeamName" class="font-bold text-yellow-300">الفريق الأول</span></div>
+                    <!-- عداد الوقت -->
+                    <div id="timerContainer" class="hidden mt-4">
+                        <div class="bg-red-600 rounded-full p-4 inline-block">
+                            <div class="text-3xl font-bold text-white" id="timerDisplay">00:00</div>
+                        </div>
+                        <div class="text-sm text-red-300 mt-2">الوقت المتبقي</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid lg:grid-cols-4 gap-6">
+                <!-- سلم الأموال -->
+                <div class="lg:col-span-1">
+                    <div class="money-ladder rounded-xl p-4">
+                        <h3 class="text-xl font-bold text-center mb-4 text-yellow-300">💰 سلم الأموال</h3>
+                        <div id="moneyLadder" class="space-y-2">
+                            <!-- سيتم إنشاؤه ديناميكياً -->
+                        </div>
+                    </div>
+                    
+                    <!-- معلومات الفرق -->
+                    <div class="mt-6">
+                        <h3 class="text-xl font-bold text-center mb-4">🏆 النتائج</h3>
+                        <div id="teamsInfo" class="space-y-3">
+                            <!-- سيتم إنشاؤها ديناميكياً -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- منطقة السؤال -->
+                <div class="lg:col-span-3">
+                    <div class="question-card rounded-xl p-8 mb-6 slide-in">
+                        <div class="text-center mb-8">
+                            <h2 id="questionText" class="text-2xl font-bold leading-relaxed">
+                                <!-- السؤال سيظهر هنا -->
+                            </h2>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <button id="optionA" onclick="selectAnswer('A')" class="option-btn p-4 rounded-xl text-lg font-bold text-right border-2 border-yellow-400">
+                                <span class="block text-yellow-300 text-sm mb-1">أ</span>
+                                <span id="optionAText"></span>
+                            </button>
+                            <button id="optionB" onclick="selectAnswer('B')" class="option-btn p-4 rounded-xl text-lg font-bold text-right border-2 border-yellow-400">
+                                <span class="block text-yellow-300 text-sm mb-1">ب</span>
+                                <span id="optionBText"></span>
+                            </button>
+                            <button id="optionC" onclick="selectAnswer('C')" class="option-btn p-4 rounded-xl text-lg font-bold text-right border-2 border-yellow-400">
+                                <span class="block text-yellow-300 text-sm mb-1">ج</span>
+                                <span id="optionCText"></span>
+                            </button>
+                            <button id="optionD" onclick="selectAnswer('D')" class="option-btn p-4 rounded-xl text-lg font-bold text-right border-2 border-yellow-400">
+                                <span class="block text-yellow-300 text-sm mb-1">د</span>
+                                <span id="optionDText"></span>
+                            </button>
+                        </div>
+                        
+                        <div class="text-center mt-8">
+                            <button id="finalAnswerBtn" onclick="confirmAnswer()" class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 px-8 py-3 rounded-xl text-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg hidden">
+                                ✅ إجابة نهائية
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- شاشة النتائج النهائية -->
+    <div id="resultsScreen" class="hidden min-h-screen flex items-center justify-center p-4">
+        <div class="text-center max-w-4xl mx-auto">
+            <div class="mb-8">
+                <h1 class="text-6xl font-black mb-4 gold-gradient bg-clip-text text-transparent">🏆 النتائج النهائية</h1>
+            </div>
+            
+            <div id="finalResults" class="space-y-4 mb-8">
+                <!-- النتائج ستظهر هنا -->
+            </div>
+            
+            <div class="flex justify-center space-x-4 space-x-reverse">
+                <button onclick="showHome()" class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 px-8 py-4 rounded-xl text-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    🏠 العودة للرئيسية
+                </button>
+                <button onclick="playAgain()" class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 px-8 py-4 rounded-xl text-xl font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    🔄 لعب مرة أخرى
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // متغيرات اللعبة
+        let gameState = {
+            teams: [],
+            questions: [],
+            currentQuestionIndex: 0,
+            currentTeamIndex: 0,
+            selectedAnswer: null,
+            gameStarted: false,
+            scores: {},
+            connectionStatus: true,
+            selectedTopic: '',
+            sessionQuestions: 0,
+            aiQuestions: 0,
+            convertedQuestions: [],
+            timer: null,
+            timeLeft: 0,
+            questionTimeLimit: 0,
+            aiGeneratedQuestions: []
+        };
+
+        // فحص حالة الاتصال
+        function checkConnection() {
+            const status = navigator.onLine;
+            const statusElement = document.getElementById('connectionStatus');
+            
+            if (status !== gameState.connectionStatus) {
+                gameState.connectionStatus = status;
+                
+                if (status) {
+                    statusElement.className = 'connection-status connection-online';
+                    statusElement.innerHTML = '<i class="fas fa-wifi"></i> متصل';
+                    showNotification('تم استعادة الاتصال بالإنترنت', 'success');
+                } else {
+                    statusElement.className = 'connection-status connection-offline';
+                    statusElement.innerHTML = '<i class="fas fa-wifi-slash"></i> غير متصل';
+                    showNotification('انقطع الاتصال بالإنترنت', 'error');
+                }
+            }
+        }
+
+        // عرض الإشعارات
+        function showNotification(message, type = 'info', duration = 3000) {
+            const notificationArea = document.getElementById('notificationArea');
+            const notification = document.createElement('div');
+            
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                ${message}
+            `;
+            
+            notificationArea.appendChild(notification);
+            
+            // إظهار الإشعار
+            setTimeout(() => notification.classList.add('show'), 100);
+            
+            // إخفاء الإشعار
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notificationArea.removeChild(notification), 300);
+            }, duration);
+        }
+
+        // إنشاء الجسيمات المتحركة
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            
+            setInterval(() => {
+                if (particlesContainer.children.length < 10) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.width = particle.style.height = (Math.random() * 4 + 2) + 'px';
+                    particle.style.animationDelay = Math.random() * 2 + 's';
+                    particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    
+                    particlesContainer.appendChild(particle);
+                    
+                    // إزالة الجسيم بعد انتهاء الحركة
+                    setTimeout(() => {
+                        if (particlesContainer.contains(particle)) {
+                            particlesContainer.removeChild(particle);
+                        }
+                    }, 6000);
+                }
+            }, 1000);
+        }
+
+        // اختيار موضوع
+        function selectTopic(topic) {
+            gameState.selectedTopic = topic;
+            document.getElementById('topic').value = topic;
+            document.getElementById('topicDetails').classList.remove('hidden');
+            
+            // إزالة التحديد السابق
+            document.querySelectorAll('.topic-selector').forEach(btn => {
+                btn.classList.remove('ring-4', 'ring-yellow-300');
+            });
+            
+            // تحديد الموضوع الجديد
+            event.target.classList.add('ring-4', 'ring-yellow-300');
+            
+            showNotification(`تم اختيار موضوع: ${topic}`, 'success', 2000);
+        }
+
+        // الأسئلة الافتراضية (فارغة الآن)
+        let defaultQuestions = [];
+
+        // سلم الأموال
+        const moneyLadder = [
+            "1,000 ريال", "2,000 ريال", "3,000 ريال", "5,000 ريال", "7,000 ريال",
+            "10,000 ريال", "15,000 ريال", "25,000 ريال", "50,000 ريال", "100,000 ريال",
+            "250,000 ريال", "500,000 ريال", "750,000 ريال", "1,000,000 ريال"
+        ];
+
+        // تحميل الأسئلة المحفوظة
+        function loadSavedQuestions() {
+            const saved = localStorage.getItem('millionaire_questions');
+            if (saved) {
+                return JSON.parse(saved);
+            }
+            return [];
+        }
+
+        // حفظ الأسئلة
+        function saveQuestions(questions) {
+            localStorage.setItem('millionaire_questions', JSON.stringify(questions));
+            updateQuestionStats();
+        }
+
+        // تحديث إحصائيات الأسئلة
+        function updateQuestionStats() {
+            const questions = loadSavedQuestions();
+            document.getElementById('totalQuestionsCount').textContent = questions.length;
+            document.getElementById('sessionQuestionsCount').textContent = gameState.sessionQuestions;
+            document.getElementById('aiQuestionsCount').textContent = gameState.aiQuestions;
+        }
+
+        // عرض قسم الإدخال اليدوي
+        function showManualInput() {
+            hideAllSections();
+            document.getElementById('manualInputSection').classList.remove('hidden');
+        }
+
+        // عرض مساعد المعلم
+        function showTeacherAssistant() {
+            hideAllSections();
+            document.getElementById('teacherAssistantSection').classList.remove('hidden');
+        }
+
+        // عرض محول النصوص
+        function showTextConverter() {
+            hideAllSections();
+            document.getElementById('textConverterSection').classList.remove('hidden');
+        }
+
+        // إخفاء جميع الأقسام
+        function hideAllSections() {
+            document.getElementById('manualInputSection').classList.add('hidden');
+            document.getElementById('teacherAssistantSection').classList.add('hidden');
+            document.getElementById('textConverterSection').classList.add('hidden');
+        }
+
+        // توليد صيغة للذكاء الاصطناعي
+        function generatePrompt() {
+            const topic = document.getElementById('assistantTopic').value || 'عام';
+            const count = document.getElementById('assistantCount').value;
+            const details = document.getElementById('assistantDetails').value;
+
+            const prompt = `أنشئ ${count} أسئلة اختيار من متعدد باللغة العربية حول موضوع "${topic}"${details ? ` مع التركيز على: ${details}` : ''}
+
+المواصفات المطلوبة:
+- كل سؤال يحتوي على 4 خيارات واضحة ومتنوعة
+- الأسئلة تعليمية وهادفة ومناسبة للطلاب
+- تجنب الأسئلة المكررة أو المتشابهة
+
+صيغة الإجابة المطلوبة:
+السؤال 1: [نص السؤال]
+أ) [الخيار الأول]
+ب) [الخيار الثاني]
+ج) [الخيار الثالث]
+د) [الخيار الرابع]
+الإجابة الصحيحة: [أ أو ب أو ج أو د]
+
+السؤال 2: [نص السؤال]
+أ) [الخيار الأول]
+ب) [الخيار الثاني]
+ج) [الخيار الثالث]
+د) [الخيار الرابع]
+الإجابة الصحيحة: [أ أو ب أو ج أو د]
+
+... وهكذا لباقي الأسئلة`;
+
+            document.getElementById('promptText').value = prompt;
+            document.getElementById('generatedPrompt').classList.remove('hidden');
+            
+            showNotification('تم إنشاء الصيغة بنجاح! انسخها واستخدمها مع أي ذكاء اصطناعي', 'success');
+        }
+
+        // نسخ الصيغة
+        function copyPrompt() {
+            const promptText = document.getElementById('promptText');
+            promptText.select();
+            document.execCommand('copy');
+            showNotification('تم نسخ الصيغة! الصقها في أي ذكاء اصطناعي', 'success', 2000);
+        }
+
+        // تحويل النص إلى أسئلة
+        function convertText() {
+            const text = document.getElementById('textToConvert').value.trim();
+            
+            if (!text) {
+                showNotification('يرجى إدخال النص المراد تحويله', 'error');
+                return;
+            }
+
+            try {
+                const questions = parseTextToQuestions(text);
+                
+                if (questions.length === 0) {
+                    showNotification('لم يتم العثور على أسئلة صحيحة في النص', 'error');
+                    return;
+                }
+
+                gameState.convertedQuestions = questions;
+                displayConvertedQuestions(questions);
+                document.getElementById('conversionResult').classList.remove('hidden');
+                
+                showNotification(`تم تحويل ${questions.length} سؤال بنجاح!`, 'success');
+            } catch (error) {
+                console.error('خطأ في تحويل النص:', error);
+                showNotification('حدث خطأ في تحويل النص. تأكد من صحة التنسيق', 'error');
+            }
+        }
+
+        // تحليل النص وتحويله إلى أسئلة
+        function parseTextToQuestions(text) {
+            const questions = [];
+            const lines = text.split('\n').map(line => line.trim()).filter(line => line);
+            
+            let currentQuestion = null;
+            let options = [];
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                
+                // البحث عن السؤال
+                if (line.match(/^(السؤال\s*\d+|س\d+|\d+[\.\-\)])/)) {
+                    // حفظ السؤال السابق إذا كان مكتملاً
+                    if (currentQuestion && options.length === 4) {
+                        questions.push({
+                            question: currentQuestion,
+                            options: options,
+                            correct: 'A' // سيتم تحديثه لاحقاً
+                        });
+                    }
+                    
+                    // بدء سؤال جديد
+                    currentQuestion = line.replace(/^(السؤال\s*\d+|س\d+|\d+[\.\-\)])\s*:?\s*/, '');
+                    options = [];
+                } else if (line.match(/^[أابجحدذ]\s*[\)\-\.]/) || line.match(/^[ABCD]\s*[\)\-\.]/)) {
+                    // خيار من الخيارات
+                    const optionText = line.replace(/^[أابجحدذABCD]\s*[\)\-\.]\s*/, '');
+                    options.push(optionText);
+                } else if (line.match(/الإجابة\s*الصحيحة|الجواب\s*الصحيح|الإجابة/)) {
+                    // الإجابة الصحيحة
+                    const answerMatch = line.match(/[أابجحدذABCD]/);
+                    if (answerMatch && questions.length > 0) {
+                        const lastQuestion = questions[questions.length - 1];
+                        const arabicToLatin = {'أ': 'A', 'ا': 'A', 'ب': 'B', 'ج': 'C', 'د': 'D'};
+                        lastQuestion.correct = arabicToLatin[answerMatch[0]] || answerMatch[0];
+                    }
+                } else if (currentQuestion && !line.match(/^[أابجحدذABCD]/)) {
+                    // إضافة إلى نص السؤال إذا لم يكن خياراً
+                    currentQuestion += ' ' + line;
+                }
+            }
+            
+            // حفظ السؤال الأخير
+            if (currentQuestion && options.length === 4) {
+                questions.push({
+                    question: currentQuestion,
+                    options: options,
+                    correct: 'A'
+                });
+            }
+            
+            return questions.filter(q => q.question && q.options.length === 4);
+        }
+
+        // عرض الأسئلة المحولة
+        function displayConvertedQuestions(questions) {
+            const container = document.getElementById('convertedQuestions');
+            let html = '';
+            
+            questions.forEach((q, index) => {
+                html += `
+                    <div class="mb-4 p-3 bg-green-800/30 rounded border border-green-600">
+                        <div class="font-bold text-sm mb-2">السؤال ${index + 1}:</div>
+                        <div class="text-sm mb-2">${q.question}</div>
+                        <div class="text-xs space-y-1">
+                            <div>أ) ${q.options[0]}</div>
+                            <div>ب) ${q.options[1]}</div>
+                            <div>ج) ${q.options[2]}</div>
+                            <div>د) ${q.options[3]}</div>
+                        </div>
+                        <div class="text-xs text-green-300 mt-2">الإجابة: ${q.correct}</div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // حفظ الأسئلة المحولة
+        function saveConvertedQuestions() {
+            if (gameState.convertedQuestions.length === 0) {
+                showNotification('لا توجد أسئلة محولة للحفظ', 'error');
+                return;
+            }
+
+            const existingQuestions = loadSavedQuestions();
+            const allQuestions = [...existingQuestions, ...gameState.convertedQuestions];
+            saveQuestions(allQuestions);
+            
+            gameState.sessionQuestions += gameState.convertedQuestions.length;
+            gameState.convertedQuestions = [];
+            
+            displayQuestions();
+            document.getElementById('textToConvert').value = '';
+            document.getElementById('conversionResult').classList.add('hidden');
+            
+            showNotification('تم حفظ الأسئلة المحولة بنجاح!', 'success');
+        }
+
+        // حذف جميع الأسئلة
+        function deleteAllQuestions() {
+            if (confirm('هل أنت متأكد من حذف جميع الأسئلة؟ هذا الإجراء لا يمكن التراجع عنه!')) {
+                localStorage.removeItem('millionaire_questions');
+                gameState.sessionQuestions = 0;
+                gameState.aiQuestions = 0;
+                displayQuestions();
+                updateQuestionStats();
+                showNotification('تم حذف جميع الأسئلة', 'info');
+            }
+        }
+
+        // تصدير الأسئلة
+        function exportQuestions() {
+            const questions = loadSavedQuestions();
+            
+            if (questions.length === 0) {
+                showNotification('لا توجد أسئلة للتصدير', 'error');
+                return;
+            }
+
+            let exportText = 'أسئلة من سيربح المليون\n';
+            exportText += '========================\n\n';
+            
+            questions.forEach((q, index) => {
+                exportText += `السؤال ${index + 1}: ${q.question}\n`;
+                exportText += `أ) ${q.options[0]}\n`;
+                exportText += `ب) ${q.options[1]}\n`;
+                exportText += `ج) ${q.options[2]}\n`;
+                exportText += `د) ${q.options[3]}\n`;
+                exportText += `الإجابة الصحيحة: ${q.correct}\n\n`;
+            });
+
+            // نسخ إلى الحافظة
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(exportText).then(() => {
+                    showNotification('تم نسخ الأسئلة إلى الحافظة!', 'success');
+                }).catch(() => {
+                    fallbackCopyTextToClipboard(exportText);
+                });
+            } else {
+                fallbackCopyTextToClipboard(exportText);
+            }
+        }
+
+        // نسخ احتياطي للحافظة
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showNotification('تم نسخ الأسئلة إلى الحافظة!', 'success');
+            } catch (err) {
+                showNotification('فشل في نسخ الأسئلة', 'error');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // إنشاء تأثير الاحتفال
+        function createCelebrationEffect() {
+            const celebrationDiv = document.createElement('div');
+            celebrationDiv.className = 'celebration-effect';
+            document.body.appendChild(celebrationDiv);
+            
+            // إنشاء قطع الكونفيتي
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.backgroundColor = ['#ffd700', '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4'][Math.floor(Math.random() * 5)];
+                celebrationDiv.appendChild(confetti);
+            }
+            
+            // إزالة التأثير بعد 3 ثوانٍ
+            setTimeout(() => {
+                document.body.removeChild(celebrationDiv);
+            }, 3000);
+        }
+        
+        // إنشاء تأثير الإجابة الخاطئة
+        function createWrongAnswerEffect() {
+            const gameScreen = document.getElementById('gameScreen');
+            gameScreen.classList.add('wrong-effect');
+            
+            setTimeout(() => {
+                gameScreen.classList.remove('wrong-effect');
+            }, 600);
+        }
+        
+        // بدء العداد الزمني
+        function startTimer() {
+            if (gameState.questionTimeLimit === 0) return;
+            
+            gameState.timeLeft = gameState.questionTimeLimit;
+            const timerContainer = document.getElementById('timerContainer');
+            const timerDisplay = document.getElementById('timerDisplay');
+            
+            timerContainer.classList.remove('hidden');
+            updateTimerDisplay();
+            
+            gameState.timer = setInterval(() => {
+                gameState.timeLeft--;
+                updateTimerDisplay();
+                
+                // تحذير عند 10 ثوانٍ متبقية
+                if (gameState.timeLeft <= 10) {
+                    timerContainer.classList.add('timer-warning');
+                }
+                
+                // انتهاء الوقت
+                if (gameState.timeLeft <= 0) {
+                    clearInterval(gameState.timer);
+                    timeUp();
+                }
+            }, 1000);
+        }
+        
+        // تحديث عرض العداد
+        function updateTimerDisplay() {
+            const minutes = Math.floor(gameState.timeLeft / 60);
+            const seconds = gameState.timeLeft % 60;
+            const timerDisplay = document.getElementById('timerDisplay');
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // إيقاف العداد
+        function stopTimer() {
+            if (gameState.timer) {
+                clearInterval(gameState.timer);
+                gameState.timer = null;
+            }
+            document.getElementById('timerContainer').classList.add('hidden');
+            document.getElementById('timerContainer').classList.remove('timer-warning');
+        }
+        
+        // انتهاء الوقت
+        function timeUp() {
+            showNotification('انتهى الوقت! ⏰', 'error');
+            createWrongAnswerEffect();
+            
+            // تعطيل جميع الأزرار
+            ['A', 'B', 'C', 'D'].forEach(option => {
+                document.getElementById(`option${option}`).disabled = true;
+            });
+            
+            // إظهار الإجابة الصحيحة
+            const question = gameState.questions[gameState.currentQuestionIndex];
+            const correctBtn = document.getElementById(`option${question.correct}`);
+            correctBtn.classList.add('correct-answer');
+            
+            setTimeout(() => {
+                nextQuestion();
+            }, 3000);
+        }
+        
+        // اختيار موضوع للذكاء الاصطناعي
+        function selectAITopic(topic) {
+            document.getElementById('aiTopic').value = topic;
+            document.getElementById('aiTopicDetails').classList.remove('hidden');
+            
+            // إزالة التحديد السابق
+            document.querySelectorAll('#aiGeneratorScreen .topic-selector').forEach(btn => {
+                btn.classList.remove('ring-4', 'ring-yellow-300');
+            });
+            
+            // تحديد الموضوع الجديد
+            event.target.classList.add('ring-4', 'ring-yellow-300');
+            
+            showNotification(`تم اختيار موضوع: ${topic}`, 'success', 2000);
+        }
+        
+        // عرض شاشة الذكاء الاصطناعي
+        function showAIGenerator() {
+            document.getElementById('homeScreen').classList.add('hidden');
+            document.getElementById('setupScreen').classList.add('hidden');
+            document.getElementById('questionManagerScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('aiGeneratorScreen').classList.remove('hidden');
+        }
+        
+        // توليد أسئلة بالذكاء الاصطناعي (الشاشة المنفصلة)
+        async function generateAIQuestions() {
+            if (!gameState.connectionStatus) {
+                showNotification('يتطلب الاتصال بالإنترنت لتوليد الأسئلة', 'error');
+                return;
+            }
+
+            const topic = document.getElementById('aiTopic').value || 'عام';
+            const topicSpecifics = document.getElementById('aiTopicSpecifics').value;
+            const educationLevel = document.getElementById('aiEducationLevel').value;
+            const count = parseInt(document.getElementById('aiQuestionCount').value);
+            const difficulty = document.getElementById('aiDifficulty').value;
+            
+            const button = document.getElementById('aiGenerateBtn');
+            const progressDiv = document.getElementById('aiGenerationProgress');
+            const progressFill = document.getElementById('aiProgressFill');
+            const progressPercent = document.getElementById('aiProgressPercent');
+            
+            button.disabled = true;
+            button.innerHTML = '<div class="loading-spinner"></div> جاري التوليد...';
+            progressDiv.classList.remove('hidden');
+
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 90) progress = 90;
+                progressFill.style.width = progress + '%';
+                progressPercent.textContent = Math.round(progress) + '%';
+            }, 200);
+
+            try {
+                const levelMap = {
+                    'elementary': 'المرحلة الابتدائية',
+                    'middle': 'المرحلة المتوسطة', 
+                    'high': 'المرحلة الثانوية',
+                    'university': 'المرحلة الجامعية'
+                };
+
+                const difficultyMap = {
+                    'easy': 'سهل ومناسب للمبتدئين',
+                    'medium': 'متوسط الصعوبة',
+                    'hard': 'صعب ومتقدم',
+                    'mixed': 'مختلط (سهل ومتوسط وصعب)'
+                };
+
+                const prompt = `أنشئ ${count} أسئلة اختيار من متعدد باللغة العربية حول موضوع "${topic}" 
+                ${topicSpecifics ? `مع التركيز على: ${topicSpecifics}` : ''}
+                
+                المواصفات المطلوبة:
+                - المرحلة التعليمية: ${levelMap[educationLevel]}
+                - مستوى الصعوبة: ${difficultyMap[difficulty]}
+                - كل سؤال يحتوي على 4 خيارات واضحة ومتنوعة
+                - الأسئلة تعليمية وهادفة ومناسبة للطلاب
+                - تجنب الأسئلة المكررة أو المتشابهة
+                
+                أرجع النتيجة بصيغة JSON صحيحة كالتالي:
+                [
+                    {
+                        "question": "نص السؤال بوضوح",
+                        "options": ["الخيار الأول", "الخيار الثاني", "الخيار الثالث", "الخيار الرابع"],
+                        "correct": "A"
+                    }
+                ]
+                
+                تأكد من أن الإجابة الصحيحة تكون A أو B أو C أو D فقط.`;
+
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyDUkgCGXTZE2huQetekVZVxIJP3xK9q7bE`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }]
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                    throw new Error('استجابة غير صحيحة من الخدمة');
+                }
+
+                const generatedText = data.candidates[0].content.parts[0].text;
+                
+                const jsonMatch = generatedText.match(/\[[\s\S]*\]/);
+                if (jsonMatch) {
+                    const questions = JSON.parse(jsonMatch[0]);
+                    
+                    const validQuestions = questions.filter(q => 
+                        q.question && q.options && q.options.length === 4 && q.correct
+                    );
+
+                    if (validQuestions.length === 0) {
+                        throw new Error('لم يتم توليد أسئلة صحيحة');
+                    }
+
+                    gameState.aiGeneratedQuestions = validQuestions;
+                    
+                    clearInterval(progressInterval);
+                    progressFill.style.width = '100%';
+                    progressPercent.textContent = '100%';
+                    
+                    showAIGeneratedPreview(validQuestions);
+                    
+                    showNotification(`تم توليد ${validQuestions.length} سؤال بنجاح! 🎉`, 'success');
+                } else {
+                    throw new Error('فشل في تحليل الأسئلة المولدة');
+                }
+            } catch (error) {
+                console.error('خطأ في توليد الأسئلة:', error);
+                clearInterval(progressInterval);
+                showNotification('حدث خطأ في توليد الأسئلة. حاول مرة أخرى.', 'error');
+            } finally {
+                button.disabled = false;
+                button.innerHTML = '<i class="fas fa-robot"></i> توليد الأسئلة بالذكاء الاصطناعي';
+                
+                setTimeout(() => {
+                    progressDiv.classList.add('hidden');
+                    progressFill.style.width = '0%';
+                    progressPercent.textContent = '0%';
+                }, 2000);
+            }
+        }
+        
+        // عرض معاينة الأسئلة المولدة بالذكاء الاصطناعي
+        function showAIGeneratedPreview(questions) {
+            const previewDiv = document.getElementById('aiGeneratedPreview');
+            const previewContent = document.getElementById('aiPreviewContent');
+            
+            let previewHTML = `<div class="space-y-2">`;
+            questions.slice(0, 3).forEach((q, index) => {
+                previewHTML += `
+                    <div class="text-xs">
+                        <strong>س${index + 1}:</strong> ${q.question.substring(0, 60)}${q.question.length > 60 ? '...' : ''}
+                    </div>
+                `;
+            });
+            
+            if (questions.length > 3) {
+                previewHTML += `<div class="text-xs text-green-200">... و ${questions.length - 3} أسئلة أخرى</div>`;
+            }
+            
+            previewHTML += `</div>`;
+            previewContent.innerHTML = previewHTML;
+            previewDiv.classList.remove('hidden');
+        }
+        
+        // حفظ الأسئلة المولدة بالذكاء الاصطناعي
+        function saveAIQuestions() {
+            if (gameState.aiGeneratedQuestions.length === 0) {
+                showNotification('لا توجد أسئلة مولدة للحفظ', 'error');
+                return;
+            }
+
+            const existingQuestions = loadSavedQuestions();
+            const allQuestions = [...existingQuestions, ...gameState.aiGeneratedQuestions];
+            saveQuestions(allQuestions);
+            
+            gameState.aiQuestions += gameState.aiGeneratedQuestions.length;
+            gameState.sessionQuestions += gameState.aiGeneratedQuestions.length;
+            
+            showNotification('تم حفظ الأسئلة بنجاح!', 'success');
+            
+            // مسح الأسئلة المولدة
+            gameState.aiGeneratedQuestions = [];
+            document.getElementById('aiGeneratedPreview').classList.add('hidden');
+        }
+        
+        // استخدام الأسئلة المولدة مباشرة
+        function useAIQuestionsDirectly() {
+            if (gameState.aiGeneratedQuestions.length === 0) {
+                showNotification('لا توجد أسئلة مولدة للاستخدام', 'error');
+                return;
+            }
+
+            gameState.questions = gameState.aiGeneratedQuestions;
+            showNotification('تم تحديد الأسئلة المولدة للاستخدام المباشر!', 'success');
+            
+            // الانتقال لشاشة الإعداد
+            showSetup();
+        }
+
+        // عرض الشاشة الرئيسية
+        function showHome() {
+            // إخفاء جميع الشاشات
+            document.getElementById('homeScreen').classList.remove('hidden');
+            document.getElementById('setupScreen').classList.add('hidden');
+            document.getElementById('questionManagerScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('aiGeneratorScreen').classList.add('hidden');
+            
+            // إغلاق أي نوافذ مفتوحة
+            closeGameInfo();
+            if (!document.getElementById('developerMenu').classList.contains('hidden')) {
+                toggleDeveloperMenu();
+            }
+        }
+
+        // عرض شاشة الإعداد
+        function showSetup() {
+            // إخفاء جميع الشاشات
+            document.getElementById('homeScreen').classList.add('hidden');
+            document.getElementById('setupScreen').classList.remove('hidden');
+            document.getElementById('questionManagerScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.add('hidden');
+            
+            updateTeamInputs();
+        }
+
+        // عرض شاشة إدارة الأسئلة
+        function showQuestionManager() {
+            document.getElementById('homeScreen').classList.add('hidden');
+            document.getElementById('setupScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('questionManagerScreen').classList.remove('hidden');
+            
+            // إخفاء جميع الأقسام الفرعية
+            hideAllSections();
+            
+            displayQuestions();
+            updateQuestionStats();
+        }
+
+        // تحديث حقول إدخال الفرق
+        function updateTeamInputs() {
+            const teamCount = parseInt(document.getElementById('teamCount').value);
+            const container = document.getElementById('teamInputs');
+            container.innerHTML = '';
+
+            for (let i = 1; i <= teamCount; i++) {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <label class="block text-sm font-medium mb-2">اسم الفريق ${i}:</label>
+                    <input type="text" id="team${i}" placeholder="الفريق ${i}" value="الفريق ${i}" class="w-full p-3 rounded-lg bg-blue-900 border border-blue-700 text-white placeholder-blue-300">
+                `;
+                container.appendChild(div);
+            }
+        }
+
+        // توليد أسئلة بالذكاء الاصطناعي
+        async function generateQuestions() {
+            // فحص الاتصال أولاً
+            if (!gameState.connectionStatus) {
+                showNotification('يتطلب الاتصال بالإنترنت لتوليد الأسئلة', 'error');
+                return;
+            }
+
+            const topic = document.getElementById('topic').value || 'عام';
+            const topicSpecifics = document.getElementById('topicSpecifics').value;
+            const educationLevel = document.getElementById('educationLevel').value;
+            const count = parseInt(document.getElementById('questionCount').value);
+            const difficulty = document.getElementById('difficulty').value;
+            
+            const button = document.getElementById('generateBtn');
+            const progressDiv = document.getElementById('generationProgress');
+            const progressFill = document.getElementById('progressFill');
+            const progressPercent = document.getElementById('progressPercent');
+            
+            button.disabled = true;
+            button.innerHTML = '<div class="loading-spinner"></div> جاري التوليد...';
+            progressDiv.classList.remove('hidden');
+
+            // محاكاة شريط التقدم
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 90) progress = 90;
+                progressFill.style.width = progress + '%';
+                progressPercent.textContent = Math.round(progress) + '%';
+            }, 200);
+
+            try {
+                // تحديد مستوى التعليم
+                const levelMap = {
+                    'elementary': 'المرحلة الابتدائية',
+                    'middle': 'المرحلة المتوسطة', 
+                    'high': 'المرحلة الثانوية',
+                    'university': 'المرحلة الجامعية'
+                };
+
+                // تحديد نوع الصعوبة
+                const difficultyMap = {
+                    'easy': 'سهل ومناسب للمبتدئين',
+                    'medium': 'متوسط الصعوبة',
+                    'hard': 'صعب ومتقدم',
+                    'mixed': 'مختلط (سهل ومتوسط وصعب)'
+                };
+
+                const prompt = `أنشئ ${count} أسئلة اختيار من متعدد باللغة العربية حول موضوع "${topic}" 
+                ${topicSpecifics ? `مع التركيز على: ${topicSpecifics}` : ''}
+                
+                المواصفات المطلوبة:
+                - المرحلة التعليمية: ${levelMap[educationLevel]}
+                - مستوى الصعوبة: ${difficultyMap[difficulty]}
+                - كل سؤال يحتوي على 4 خيارات واضحة ومتنوعة
+                - الأسئلة تعليمية وهادفة ومناسبة للطلاب
+                - تجنب الأسئلة المكررة أو المتشابهة
+                
+                أرجع النتيجة بصيغة JSON صحيحة كالتالي:
+                [
+                    {
+                        "question": "نص السؤال بوضوح",
+                        "options": ["الخيار الأول", "الخيار الثاني", "الخيار الثالث", "الخيار الرابع"],
+                        "correct": "A"
+                    }
+                ]
+                
+                تأكد من أن الإجابة الصحيحة تكون A أو B أو C أو D فقط.`;
+
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyDUkgCGXTZE2huQetekVZVxIJP3xK9q7bE`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }]
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                    throw new Error('استجابة غير صحيحة من الخدمة');
+                }
+
+                const generatedText = data.candidates[0].content.parts[0].text;
+                
+                // استخراج JSON من النص
+                const jsonMatch = generatedText.match(/\[[\s\S]*\]/);
+                if (jsonMatch) {
+                    const questions = JSON.parse(jsonMatch[0]);
+                    
+                    // التحقق من صحة الأسئلة
+                    const validQuestions = questions.filter(q => 
+                        q.question && q.options && q.options.length === 4 && q.correct
+                    );
+
+                    if (validQuestions.length === 0) {
+                        throw new Error('لم يتم توليد أسئلة صحيحة');
+                    }
+
+                    gameState.questions = validQuestions;
+                    
+                    // حفظ الأسئلة
+                    const existingQuestions = loadSavedQuestions();
+                    const allQuestions = [...existingQuestions, ...validQuestions];
+                    saveQuestions(allQuestions);
+                    
+                    // تحديث الإحصائيات
+                    gameState.aiQuestions += validQuestions.length;
+                    gameState.sessionQuestions += validQuestions.length;
+                    
+                    // إكمال شريط التقدم
+                    clearInterval(progressInterval);
+                    progressFill.style.width = '100%';
+                    progressPercent.textContent = '100%';
+                    
+                    // عرض معاينة الأسئلة
+                    showGeneratedPreview(validQuestions);
+                    
+                    // تحديث قائمة الأسئلة
+                    displayQuestions();
+                    
+                    showNotification(`تم توليد ${validQuestions.length} سؤال بنجاح! 🎉`, 'success');
+                } else {
+                    throw new Error('فشل في تحليل الأسئلة المولدة');
+                }
+            } catch (error) {
+                console.error('خطأ في توليد الأسئلة:', error);
+                clearInterval(progressInterval);
+                
+                let errorMessage = 'حدث خطأ في توليد الأسئلة. ';
+                if (!gameState.connectionStatus) {
+                    errorMessage += 'تحقق من الاتصال بالإنترنت.';
+                } else if (error.message.includes('HTTP error')) {
+                    errorMessage += 'مشكلة في الخدمة، حاول مرة أخرى.';
+                } else {
+                    errorMessage += 'سيتم استخدام الأسئلة الافتراضية.';
+                    gameState.questions = defaultQuestions.slice(0, count);
+                }
+                
+                showNotification(errorMessage, 'error');
+            } finally {
+                button.disabled = false;
+                button.innerHTML = '<i class="fas fa-robot"></i> توليد بالذكاء الاصطناعي';
+                
+                setTimeout(() => {
+                    progressDiv.classList.add('hidden');
+                    progressFill.style.width = '0%';
+                    progressPercent.textContent = '0%';
+                }, 2000);
+            }
+        }
+
+        // عرض معاينة الأسئلة المولدة
+        function showGeneratedPreview(questions) {
+            const previewDiv = document.getElementById('generatedPreview');
+            const previewContent = document.getElementById('previewContent');
+            
+            let previewHTML = `<div class="space-y-2">`;
+            questions.slice(0, 3).forEach((q, index) => {
+                previewHTML += `
+                    <div class="text-xs">
+                        <strong>س${index + 1}:</strong> ${q.question.substring(0, 60)}${q.question.length > 60 ? '...' : ''}
+                    </div>
+                `;
+            });
+            
+            if (questions.length > 3) {
+                previewHTML += `<div class="text-xs text-green-200">... و ${questions.length - 3} أسئلة أخرى</div>`;
+            }
+            
+            previewHTML += `</div>`;
+            previewContent.innerHTML = previewHTML;
+            previewDiv.classList.remove('hidden');
+        }
+
+        // استخدام الأسئلة اليدوية
+        function useManualQuestions() {
+            const count = parseInt(document.getElementById('questionCount').value);
+            const savedQuestions = loadSavedQuestions();
+            
+            if (savedQuestions.length === 0) {
+                showNotification('لا توجد أسئلة محفوظة! يرجى إضافة أسئلة أولاً', 'error');
+                return;
+            }
+            
+            gameState.questions = savedQuestions.slice(0, count);
+            showNotification(`تم تحديد ${gameState.questions.length} سؤال من الأسئلة المحفوظة! 📝`, 'success');
+        }
+
+        // إضافة سؤال جديد
+        function addQuestion() {
+            const question = document.getElementById('newQuestion').value.trim();
+            const optionA = document.getElementById('optionA').value.trim();
+            const optionB = document.getElementById('optionB').value.trim();
+            const optionC = document.getElementById('optionC').value.trim();
+            const optionD = document.getElementById('optionD').value.trim();
+            const correct = document.getElementById('correctAnswer').value;
+
+            if (!question || !optionA || !optionB || !optionC || !optionD) {
+                showNotification('يرجى ملء جميع الحقول!', 'error');
+                return;
+            }
+
+            const newQuestion = {
+                question: question,
+                options: [optionA, optionB, optionC, optionD],
+                correct: correct
+            };
+
+            const existingQuestions = loadSavedQuestions();
+            existingQuestions.push(newQuestion);
+            saveQuestions(existingQuestions);
+
+            gameState.sessionQuestions++;
+
+            // مسح الحقول
+            document.getElementById('newQuestion').value = '';
+            document.getElementById('optionA').value = '';
+            document.getElementById('optionB').value = '';
+            document.getElementById('optionC').value = '';
+            document.getElementById('optionD').value = '';
+
+            displayQuestions();
+            showNotification('تم إضافة السؤال بنجاح! ✅', 'success');
+        }
+
+        // عرض الأسئلة
+        function displayQuestions() {
+            const questions = loadSavedQuestions();
+            const container = document.getElementById('questionsList');
+            const noQuestionsMsg = document.getElementById('noQuestionsMessage');
+            
+            container.innerHTML = '';
+
+            if (questions.length === 0) {
+                noQuestionsMsg.classList.remove('hidden');
+                return;
+            }
+
+            noQuestionsMsg.classList.add('hidden');
+
+            questions.forEach((q, index) => {
+                const div = document.createElement('div');
+                div.className = 'bg-blue-800/50 backdrop-blur-sm p-4 rounded-lg border border-blue-600 hover:border-blue-400 transition-all duration-300';
+                div.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="font-bold text-sm flex items-center">
+                            <i class="fas fa-question-circle text-yellow-400 mr-2"></i>
+                            السؤال ${index + 1}
+                        </h4>
+                        <button onclick="deleteQuestion(${index})" class="text-red-400 hover:text-red-300 text-sm transition-all duration-300 transform hover:scale-110">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                    <p class="text-sm mb-3 text-gray-100">${q.question}</p>
+                    <div class="text-xs text-blue-200 space-y-1">
+                        <div class="flex items-center">
+                            <i class="fas fa-circle text-red-400 text-xs mr-2"></i>
+                            <span>أ: ${q.options[0]}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-circle text-yellow-400 text-xs mr-2"></i>
+                            <span>ب: ${q.options[1]}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-circle text-green-400 text-xs mr-2"></i>
+                            <span>ج: ${q.options[2]}</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-circle text-purple-400 text-xs mr-2"></i>
+                            <span>د: ${q.options[3]}</span>
+                        </div>
+                        <div class="text-green-300 font-bold mt-2 flex items-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            الإجابة الصحيحة: ${q.correct}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+
+            updateQuestionStats();
+        }
+
+        // حذف سؤال
+        function deleteQuestion(index) {
+            if (confirm('هل أنت متأكد من حذف هذا السؤال؟')) {
+                const questions = loadSavedQuestions();
+                questions.splice(index, 1);
+                saveQuestions(questions);
+                displayQuestions();
+                showNotification('تم حذف السؤال', 'info');
+            }
+        }
+
+        // بدء اللعبة
+        function startGame() {
+            const teamCount = parseInt(document.getElementById('teamCount').value);
+            gameState.teams = [];
+            gameState.scores = {};
+
+            // جمع أسماء الفرق
+            for (let i = 1; i <= teamCount; i++) {
+                const teamName = document.getElementById(`team${i}`).value || `الفريق ${i}`;
+                gameState.teams.push(teamName);
+                gameState.scores[teamName] = 0;
+            }
+
+            // التأكد من وجود أسئلة
+            if (!gameState.questions || gameState.questions.length === 0) {
+                const count = parseInt(document.getElementById('questionCount').value);
+                const savedQuestions = loadSavedQuestions();
+                
+                if (savedQuestions.length === 0) {
+                    showNotification('لا توجد أسئلة محفوظة! يرجى إضافة أسئلة أولاً أو توليدها بالذكاء الاصطناعي', 'error');
+                    return;
+                }
+                
+                gameState.questions = savedQuestions.slice(0, count);
+            }
+
+            // إعداد التوقيت
+            gameState.questionTimeLimit = parseInt(document.getElementById('questionTimer').value);
+
+            // إعداد اللعبة
+            gameState.currentQuestionIndex = 0;
+            gameState.currentTeamIndex = 0;
+            gameState.selectedAnswer = null;
+            gameState.gameStarted = true;
+
+            // إخفاء جميع الشاشات وعرض شاشة اللعبة
+            document.getElementById('homeScreen').classList.add('hidden');
+            document.getElementById('setupScreen').classList.add('hidden');
+            document.getElementById('questionManagerScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('aiGeneratorScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.remove('hidden');
+
+            // تحديث واجهة اللعبة
+            updateGameUI();
+            displayCurrentQuestion();
+            
+            showNotification('بدأت اللعبة! حظاً موفقاً للجميع! 🎮', 'success');
+        }
+
+        // تحديث واجهة اللعبة
+        function updateGameUI() {
+            // تحديث معلومات السؤال الحالي
+            document.getElementById('currentQuestionNumber').textContent = gameState.currentQuestionIndex + 1;
+            document.getElementById('totalQuestions').textContent = gameState.questions.length;
+            document.getElementById('currentTeamName').textContent = gameState.teams[gameState.currentTeamIndex];
+
+            // تحديث سلم الأموال
+            const moneyContainer = document.getElementById('moneyLadder');
+            moneyContainer.innerHTML = '';
+            
+            for (let i = moneyLadder.length - 1; i >= 0; i--) {
+                const div = document.createElement('div');
+                div.className = `p-2 rounded text-center text-sm font-bold ${
+                    i === gameState.currentQuestionIndex ? 'bg-yellow-500 text-black' : 
+                    i < gameState.currentQuestionIndex ? 'bg-green-600' : 'bg-blue-800'
+                }`;
+                div.textContent = moneyLadder[i];
+                moneyContainer.appendChild(div);
+            }
+
+            // تحديث معلومات الفرق
+            const teamsContainer = document.getElementById('teamsInfo');
+            teamsContainer.innerHTML = '';
+            
+            gameState.teams.forEach((team, index) => {
+                const div = document.createElement('div');
+                div.className = `team-card p-3 rounded-lg ${
+                    index === gameState.currentTeamIndex ? 'active-team' : ''
+                }`;
+                div.innerHTML = `
+                    <div class="font-bold">${team}</div>
+                    <div class="text-sm text-yellow-300">${gameState.scores[team]} نقطة</div>
+                `;
+                teamsContainer.appendChild(div);
+            });
+        }
+
+        // عرض السؤال الحالي
+        function displayCurrentQuestion() {
+            if (gameState.currentQuestionIndex >= gameState.questions.length) {
+                endGame();
+                return;
+            }
+
+            const question = gameState.questions[gameState.currentQuestionIndex];
+            
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('optionAText').textContent = question.options[0];
+            document.getElementById('optionBText').textContent = question.options[1];
+            document.getElementById('optionCText').textContent = question.options[2];
+            document.getElementById('optionDText').textContent = question.options[3];
+
+            // إعادة تعيين الأزرار
+            ['A', 'B', 'C', 'D'].forEach(option => {
+                const btn = document.getElementById(`option${option}`);
+                btn.className = 'option-btn p-4 rounded-xl text-lg font-bold text-right border-2 border-yellow-400';
+                btn.disabled = false;
+            });
+
+            document.getElementById('finalAnswerBtn').classList.add('hidden');
+            gameState.selectedAnswer = null;
+            
+            // بدء العداد الزمني
+            startTimer();
+        }
+
+        // اختيار إجابة
+        function selectAnswer(option) {
+            // إزالة التحديد السابق
+            ['A', 'B', 'C', 'D'].forEach(opt => {
+                const btn = document.getElementById(`option${opt}`);
+                btn.classList.remove('ring-4', 'ring-yellow-300');
+            });
+
+            // تحديد الإجابة الجديدة
+            const selectedBtn = document.getElementById(`option${option}`);
+            selectedBtn.classList.add('ring-4', 'ring-yellow-300');
+            
+            gameState.selectedAnswer = option;
+            document.getElementById('finalAnswerBtn').classList.remove('hidden');
+        }
+
+        // تأكيد الإجابة
+        function confirmAnswer() {
+            if (!gameState.selectedAnswer) return;
+
+            // إيقاف العداد الزمني
+            stopTimer();
+
+            const question = gameState.questions[gameState.currentQuestionIndex];
+            const isCorrect = gameState.selectedAnswer === question.correct;
+            const currentTeam = gameState.teams[gameState.currentTeamIndex];
+
+            // تعطيل جميع الأزرار
+            ['A', 'B', 'C', 'D'].forEach(option => {
+                document.getElementById(`option${option}`).disabled = true;
+            });
+
+            // إظهار الإجابة الصحيحة والخاطئة
+            const correctBtn = document.getElementById(`option${question.correct}`);
+            correctBtn.classList.add('correct-answer');
+
+            if (!isCorrect) {
+                const selectedBtn = document.getElementById(`option${gameState.selectedAnswer}`);
+                selectedBtn.classList.add('wrong-answer');
+            }
+
+            // تحديث النقاط والتأثيرات
+            if (isCorrect) {
+                gameState.scores[currentTeam] += 10;
+                createCelebrationEffect();
+                showNotification(`🎉 إجابة صحيحة! حصل ${currentTeam} على 10 نقاط`, 'success');
+                setTimeout(() => {
+                    nextQuestion();
+                }, 3000);
+            } else {
+                createWrongAnswerEffect();
+                showNotification(`❌ إجابة خاطئة! الإجابة الصحيحة هي: ${question.correct}`, 'error');
+                setTimeout(() => {
+                    nextQuestion();
+                }, 3000);
+            }
+
+            document.getElementById('finalAnswerBtn').classList.add('hidden');
+        }
+
+        // السؤال التالي
+        function nextQuestion() {
+            // إيقاف العداد الزمني
+            stopTimer();
+            
+            gameState.currentQuestionIndex++;
+            gameState.currentTeamIndex = (gameState.currentTeamIndex + 1) % gameState.teams.length;
+            
+            updateGameUI();
+            
+            if (gameState.currentQuestionIndex < gameState.questions.length) {
+                setTimeout(() => {
+                    displayCurrentQuestion();
+                }, 1000);
+            } else {
+                setTimeout(() => {
+                    endGame();
+                }, 1000);
+            }
+        }
+
+        // إيقاف اللعبة مؤقتاً
+        function pauseGame() {
+            if (confirm('هل تريد إيقاف اللعبة مؤقتاً؟')) {
+                alert('تم إيقاف اللعبة مؤقتاً. اضغط موافق للمتابعة.');
+            }
+        }
+
+        // إنهاء اللعبة
+        function endGame() {
+            // إخفاء جميع الشاشات وعرض شاشة النتائج
+            document.getElementById('homeScreen').classList.add('hidden');
+            document.getElementById('setupScreen').classList.add('hidden');
+            document.getElementById('questionManagerScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+            
+            // ترتيب الفرق حسب النقاط
+            const sortedTeams = [...gameState.teams].sort((a, b) => gameState.scores[b] - gameState.scores[a]);
+            
+            const resultsContainer = document.getElementById('finalResults');
+            resultsContainer.innerHTML = '';
+            
+            sortedTeams.forEach((team, index) => {
+                const div = document.createElement('div');
+                div.className = `p-6 rounded-xl text-center transition-all duration-300 transform hover:scale-105 ${
+                    index === 0 ? 'bg-gradient-to-r from-yellow-400 to-yellow-600 text-black' : 
+                    index === 1 ? 'bg-gradient-to-r from-gray-400 to-gray-500 text-black' : 
+                    index === 2 ? 'bg-gradient-to-r from-yellow-600 to-yellow-700 text-black' : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
+                }`;
+                
+                const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅';
+                
+                div.innerHTML = `
+                    <div class="text-4xl mb-2">${medal}</div>
+                    <div class="text-2xl font-bold">${team}</div>
+                    <div class="text-xl">${gameState.scores[team]} نقطة</div>
+                    <div class="text-lg">${index === 0 ? 'الفائز!' : `المركز ${index + 1}`}</div>
+                `;
+                resultsContainer.appendChild(div);
+            });
+            
+            showNotification('انتهت اللعبة! تهانينا للفائزين! 🎉', 'success');
+        }
+
+        // لعب مرة أخرى
+        function playAgain() {
+            // إعادة تعيين حالة اللعبة
+            gameState.teams = [];
+            gameState.questions = [];
+            gameState.currentQuestionIndex = 0;
+            gameState.currentTeamIndex = 0;
+            gameState.selectedAnswer = null;
+            gameState.gameStarted = false;
+            gameState.scores = {};
+            
+            showSetup();
+        }
+
+        // وظائف القائمة المنبثقة
+        function toggleDeveloperMenu() {
+            const menu = document.getElementById('developerMenu');
+            const isHidden = menu.classList.contains('hidden');
+            
+            if (isHidden) {
+                menu.classList.remove('hidden');
+                setTimeout(() => {
+                    menu.classList.remove('scale-95', 'opacity-0');
+                    menu.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            } else {
+                menu.classList.add('scale-95', 'opacity-0');
+                menu.classList.remove('scale-100', 'opacity-100');
+                setTimeout(() => {
+                    menu.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        function showGameInfo() {
+            document.getElementById('gameInfoModal').classList.remove('hidden');
+            // إغلاق قائمة المطور إذا كانت مفتوحة
+            const menu = document.getElementById('developerMenu');
+            if (!menu.classList.contains('hidden')) {
+                toggleDeveloperMenu();
+            }
+        }
+
+        function closeGameInfo() {
+            document.getElementById('gameInfoModal').classList.add('hidden');
+        }
+
+        // إغلاق النوافذ عند النقر خارجها
+        document.addEventListener('click', function(event) {
+            const developerMenu = document.getElementById('developerMenu');
+            const gameInfoModal = document.getElementById('gameInfoModal');
+            
+            // إغلاق قائمة المطور
+            if (!developerMenu.contains(event.target) && 
+                !event.target.closest('button[onclick="toggleDeveloperMenu()"]')) {
+                if (!developerMenu.classList.contains('hidden')) {
+                    toggleDeveloperMenu();
+                }
+            }
+            
+            // إغلاق نافذة معلومات اللعبة
+            if (event.target === gameInfoModal) {
+                closeGameInfo();
+            }
+        });
+
+        // تهيئة التطبيق
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTeamInputs();
+            displayQuestions();
+            createParticles();
+            updateQuestionStats();
+            
+            // فحص الاتصال كل 5 ثوانٍ
+            setInterval(checkConnection, 5000);
+            checkConnection(); // فحص أولي
+            
+            // مراقبة تغيير حالة الاتصال
+            window.addEventListener('online', () => {
+                gameState.connectionStatus = true;
+                checkConnection();
+            });
+            
+            window.addEventListener('offline', () => {
+                gameState.connectionStatus = false;
+                checkConnection();
+            });
+            
+            // رسالة ترحيب
+            setTimeout(() => {
+                showNotification('مرحباً بك في لعبة من سيربح المليون التعليمية المطورة! 🎓✨', 'info', 4000);
+            }, 1000);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96e92b23754c5ccf',t:'MTc1NTA5ODEzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
